@@ -1,1 +1,2 @@
-require './config/environment'
+class AffirmationsController < ApplicationController
+end

@@ -6,6 +6,5 @@ end
 
 use Rack::MethodOverride
 use AffirmationsController
-use SessionsController
 use UsersController
 run ApplicationController

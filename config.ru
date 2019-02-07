@@ -7,5 +7,5 @@ end
 use Rack::MethodOverride
 use UsersController
 use AffirmationsController
-use SessonsController
+use SessionsController
 run ApplicationController

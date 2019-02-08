@@ -1,11 +1,20 @@
 class AffirmationsController < ApplicationController
 
   get '/affirmations' do
-    erb :'/affirmations'
+    if logged_in?
+      @affirmations = Affirmation.all
+      erb :'/affirmations/index'
+    else
+      redirect '/login'
+    end
   end
 
   get '/affirmations/new' do
-    erb :'/affirmations/new'
+    if logged_in?
+      erb :'/affirmations/new'
+    else
+      redirect '/login'
+    end
   end
 
 

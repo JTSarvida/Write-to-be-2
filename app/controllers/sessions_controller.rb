@@ -8,4 +8,14 @@ class SessionsController < ApplicationController
     erb :'/sessions/register'
   end
 
+  post '/register' do
+
+  end
+  post '/sessions' do
+    session[:email] = params[:email]
+    session[:username] = params[:username]
+    redirect '/affirmations'
+  end
+
+
 end

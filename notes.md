@@ -6,3 +6,8 @@
 - ./views/affirmations/edit.erb
 - ./views/affirmations/index.erb
 - ./views/affirmations/show.erb
+
+## Research some things not taught through Flatiron
+
+- learn how to make a likes system
+- learn how to make a friends system

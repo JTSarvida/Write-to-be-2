@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :affirmations
-  validates_presence_of :username, :email, :password, :match_id
+  validates_presence_of :username, :email, :password
   has_secure_password
 
   def slug

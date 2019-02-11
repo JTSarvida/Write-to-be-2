@@ -26,4 +26,13 @@ class AffirmationsController < ApplicationController
     end
   end
 
+  post '/affirmations' do
+    if params[:affirmation]['content'].empty?
+      redirect '/affirmations/new'
+    else
+      @affirmation = Affirmation.create(params[:affirmation])
+      redirect 'users/show'
+    end
+  end
+
 end

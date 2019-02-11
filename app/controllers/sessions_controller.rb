@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   end
 
   post '/register' do
-
+    
   end
   post '/sessions' do
     session[:email] = params[:email]

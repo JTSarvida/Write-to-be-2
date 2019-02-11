@@ -1,3 +1,14 @@
-<%= current_user.username %>
-<%= current_user.friends.count %>
-<%= current_user.affirmations.count %>
+<%= current_user.username %><br>
+<!-- <%= current_user.friends.count %> <br>-->
+<%= current_user.affirmations.count %><br>
+
+<h1> Daily Affirmations </h1>
+<% @dailyaffirmations.each do |affirmation| %>
+<div>
+  <%= affirmation.content %>
+</div>
+<%end%>
+
+<!-- Will implement once I get like system in.
+<h1> Liked Affirmations </h1>
+-->

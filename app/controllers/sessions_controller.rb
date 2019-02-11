@@ -24,9 +24,21 @@ class SessionsController < ApplicationController
     redirect '/affirmations'
   end
 
-  get 'logout' do
+  post '/login' do
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect'/users/show'
+    else
+      flash[:message] = 'Incorrect login information.'
+      redirect '/'
+    end
+  end
+
+  get '/logout' do
     if logged_in?
       session.clear
+      redirect '/'
     else
       redirect '/'
     end

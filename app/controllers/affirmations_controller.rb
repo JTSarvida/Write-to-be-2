@@ -27,12 +27,11 @@ class AffirmationsController < ApplicationController
   end
 
   post '/affirmations' do
-    @user_affirmations = 0
     if params[:affirmation]['content'].empty?
       redirect '/affirmations/new'
     else
       @affirmation = Affirmation.create(params[:affirmation])
-      @user_affirmations += 1
+      current_user.affirmations << @affirmation
       redirect 'users/show'
     end
   end

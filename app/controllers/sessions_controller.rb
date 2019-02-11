@@ -10,8 +10,10 @@ class SessionsController < ApplicationController
 
   post '/register' do
     @users = User.all
+    @usernames = []
+    @users.each {|user| @usernames << user.username}
     if !params[:password].empty? && !params[:username].empty? && !params[:email].empty?
-      if @users.map {|user| user.username == params[:username] } || @users.map {|user| user.email == params[:email] }
+      if @usernames.include?(params[:username]) || @usernames.include?(params[:email])
         flash[:alreadyused] = 'This username or email address has already been used.'
         redirect '/register'
       else
@@ -20,6 +22,7 @@ class SessionsController < ApplicationController
         redirect '/users/show'
       end
     else
+      flash[:alreadyused] = 'Please enter a username, email, and password.'
       redirect '/register'
     end
   end

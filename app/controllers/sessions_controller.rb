@@ -9,11 +9,16 @@ class SessionsController < ApplicationController
   end
 
   post '/register' do
+    @users = User.all
     if !params[:password].empty? && !params[:username].empty? && !params[:email].empty?
-      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-      @user.save
-      session[:user_id] = @user.id
-      redirect '/users/show'
+      if @users.map {|user| user.username == params[:username] } || @users.map {|user| user.email == params[:email] }
+        flash[:alreadyused] = 'This username or email address has already been used.'
+        redirect '/register'
+      else
+        @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+        session[:user_id] = @user.id
+        redirect '/users/show'
+      end
     else
       redirect '/register'
     end

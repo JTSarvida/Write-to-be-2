@@ -20,7 +20,8 @@ class AffirmationsController < ApplicationController
   get '/affirmations/:id' do
     if logged_in?
       @affirmation = Affirmation.find_by_id(params[:id])
-      erb :'affirmations/show'
+      @user = User.find_by_id(@affirmation.user_id)
+      erb :'affirmations/single-affirmation'
     else
       redirect '/login'
     end

@@ -10,7 +10,12 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/' do
-		erb :index
+		@dailyaffirmations = Affirmation.all.take(10)
+		if logged_in?
+			erb :'/users/show'
+		else
+			erb :index
+		end
 	end
 
 	helpers do

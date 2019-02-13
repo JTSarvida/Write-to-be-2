@@ -36,14 +36,14 @@ class SessionsController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       flash[:emptyinput] = "Please don't leave any field blank"
-      redirect '/'
+      redirect '/login'
     else
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect'/home'
       else
         flash[:message] = 'Incorrect login information.'
-        redirect '/'
+        redirect '/login'
       end
     end
   end

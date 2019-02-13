@@ -29,7 +29,7 @@ class AffirmationsController < ApplicationController
     if logged_in?
       @affirmations = Affirmation.all
       @affirmation = @affirmations[params[:id].to_i-1]
-      @user = User.find_by!(@affirmation.user_id)
+      @user = User.find(@affirmation.user_id)
       erb :'/affirmations/single-affirmation'
     else
       redirect '/login'

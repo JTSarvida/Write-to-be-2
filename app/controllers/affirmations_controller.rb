@@ -46,4 +46,41 @@ class AffirmationsController < ApplicationController
     end
   end
 
+  get '/affirmations/:id/edit' do
+    if logged_in?
+      @affirmations = Affirmation.all
+      @affirmation = @affirmations.find(params[:id])
+      if current_user.id == @affirmation.user_id
+        erb :'affirmations/edit'
+      else
+        flash[:wronguser] = "You cannot edit other user's affirmations"
+        redirect "/affirmations/#{@affirmation.id}"
+      end
+    else
+      redirect '/login'
+    end
+  end
+
+  patch '/affirmations/:id' do
+    @affirmations = Affirmation.all
+    @affirmation = @affirmations.find(params[:id])
+    if logged_in?
+      if params[:affirmation]["content"] == ""
+        flash[:emptyinput] = "Please enter your desired edit"
+        redirect "/affirmations/#{@affirmation.id}/edit"
+      else
+        if @affirmation.user_id == current_user.id
+          @affirmation.update(params[:affirmation])
+          redirect "/affirmations/#{@affirmation.id}"
+        else
+          flash[:wronguser] = "You cannot edit other user's affirmations"
+          redirect "/affirmations/#{@affirmation.id}/edit"
+        end
+      end
+    else
+      redirect'/login'
+    end 
+  end
+
+
 end

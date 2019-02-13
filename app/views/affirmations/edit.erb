@@ -1,0 +1,20 @@
+<div id= 'flash'>
+<%if flash[:emptyinput] %>
+  <%= flash[:emptyinput] %>
+<% end %>
+<%if flash[:wronguser] %>
+  <%= flash[:wronguser] %>
+<% end %>
+</div>
+<h1>Edit your affirmation!</h1>
+
+<form action='/affirmations/<%=@affirmation.id%>' method='POST'>
+  <input id='hidden' type='hidden' name='_method' value='PATCH'>
+  <input type='text' name='affirmation[content]' id='content' value='<%=@affirmation.content%>'>
+  <br>
+  <input type='submit' value='Edit'>
+</form>
+
+<footer>
+<a href='/home'> Home </a> or <a href='/logout'>Log Out</a>
+</footer>

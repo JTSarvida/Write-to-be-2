@@ -79,7 +79,23 @@ class AffirmationsController < ApplicationController
       end
     else
       redirect'/login'
-    end 
+    end
+  end
+
+  delete '/affirmations/:id/delete' do
+    @affirmations = Affirmation.all
+    @affirmation = @affirmations.find(params[:id])
+    if logged_in?
+      if current_user.id == @affirmation.user_id
+        @affirmation.delete
+        redirect '/home'
+      else
+        flash[:wronguser] = "You cannot delete other user's affirmations"
+        redirect "/affirmations/#{@affirmation.id}"
+      end
+    else
+      redirect '/login'
+    end
   end
 
 

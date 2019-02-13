@@ -5,7 +5,13 @@
 </div>
 <h1> <%= @affirmation.content %></h1>
 <h2> This affirmation was written by <a href='/users/profile/<%= @user.slug%>'><%= @user.username %></a> </h2> <br>
-<a href='/affirmations/<%=@affirmation.id%>/edit'> Edit Affirmation</a><br>
+<a href='/affirmations/<%=@affirmation.id%>/edit'> Edit Affirmation</a> <br>or
+<form action="/affirmations/<%=@affirmation.id%>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" id="delete" value="Delete Affirmation">
+</form>
+<br>
+
 <footer>
 <a href='/home'> Home </a> or <a href='/logout'>Log Out</a>
 </footer>

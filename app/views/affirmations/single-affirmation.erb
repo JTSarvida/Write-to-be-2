@@ -1,6 +1,11 @@
+<div id= 'flash'>
+<%if flash[:wronguser] %>
+  <%= flash[:wronguser] %>
+<% end %>
+</div>
 <h1> <%= @affirmation.content %></h1>
-<h2> This affirmation was written by <a href='/users/profile/<%= @user.slug%>'><%= @user.username %></a> </h2>
-
+<h2> This affirmation was written by <a href='/users/profile/<%= @user.slug%>'><%= @user.username %></a> </h2> <br>
+<a href='/affirmations/<%=@affirmation.id%>/edit'> Edit Affirmation</a><br>
 <footer>
 <a href='/home'> Home </a> or <a href='/logout'>Log Out</a>
 </footer>

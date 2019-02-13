@@ -34,12 +34,17 @@ class SessionsController < ApplicationController
 
   post '/login' do
     @user = User.find_by(:username => params[:username])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect'/home'
-    else
-      flash[:message] = 'Incorrect login information.'
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      flash[:emptyinput] = "Please don't leave any field blank"
       redirect '/'
+    else
+      if @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        redirect'/home'
+      else
+        flash[:message] = 'Incorrect login information.'
+        redirect '/'
+      end
     end
   end
 

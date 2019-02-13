@@ -1,19 +1,22 @@
-<%= current_user.username %><br>
+<div id='user_profile_box'>
+<a style= "font-weight: bold;" href='/users/profile'><%= current_user.username %></a><br>
 <%# current_user.friends.count %>
 <a href='/affirmations/show'><%= current_user.affirmations.count %> Written Affirmations</a><br>
+<a href='/affirmations'>All affirmations</a> <br>
 <a href='/affirmations/new'> Create New Affirmation </a>
+</div>
 
 <h1> Daily Affirmations </h1>
 <% @dailyaffirmations.each do |affirmation| %>
 <div>
-  <%= affirmation.content %>
+  <a href= "/affirmations/<%= affirmation.id %>"><%= affirmation.content %></a>
 </div>
 <%end%>
 
 <!-- Will implement once I get like system in.
 <h1> Liked Affirmations </h1>
 -->
-<a href='/affirmations'>All affirmations</a> <br>
+ <br>
 
 <footer>
 <a href='/logout'>Log Out</a>

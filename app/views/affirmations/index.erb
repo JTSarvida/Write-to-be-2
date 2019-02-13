@@ -1,7 +1,6 @@
 <h1>Everyone's Affirmations</h1>
 <% @affirmations.each do |affirmation| %>
   <div>
-
     <a href= "/affirmations/<%= affirmation.id %>"> <%= affirmation.content %> </a>
   </div>
 <%end%><br>

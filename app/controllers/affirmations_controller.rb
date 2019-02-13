@@ -17,6 +17,14 @@ class AffirmationsController < ApplicationController
     end
   end
 
+  get '/affirmations/show' do
+    if logged_in?
+      erb :'/affirmations/show'
+    else
+      redirect '/login'
+    end
+  end
+
   get '/affirmations/:id' do
     if logged_in?
       @affirmations = Affirmation.all
@@ -34,7 +42,7 @@ class AffirmationsController < ApplicationController
     else
       @affirmation = Affirmation.create(params[:affirmation])
       current_user.affirmations << @affirmation
-      redirect 'users/show'
+      redirect 'home'
     end
   end
 

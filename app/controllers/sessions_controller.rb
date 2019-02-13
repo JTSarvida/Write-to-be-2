@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
       else
         @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
         session[:user_id] = @user.id
-        redirect '/users/show'
+        redirect '/home'
       end
     else
       flash[:alreadyused] = 'Please enter a username, email, and password.'
@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect'/users/show'
+      redirect'/home'
     else
       flash[:message] = 'Incorrect login information.'
       redirect '/'

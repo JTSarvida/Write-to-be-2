@@ -1,22 +1,35 @@
-<div id= 'flash'>
-<%if flash[:wronguser] %>
-  <%= flash[:wronguser] %>
-<% end %>
-</div>
+
 <h1> <%= @affirmation.content %></h1>
 <h2> This affirmation was written by <a href='/users/profile/<%= @user.slug%>'><%= @user.username %></a> </h2>
 
 <form style="display: inline-block;"method="GET" action="/affirmations/<%=@affirmation.id%>/edit">
-<input type="submit" value="Edit Affirmation">
+<input type="submit" value="Edit Affirmation" onclick="document.getElementById('id01').style.display='block'"
+class="w3-button">
 </form>
 
 <form style="display: inline-block;"action="/affirmations/<%=@affirmation.id%>/delete" method="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" id="delete" value="Delete Affirmation">
+  <input type="submit" id="delete" value="Delete Affirmation" onclick="document.getElementById('id01').style.display='block'"
+class="w3-button">
 </form>
 <br>
 <br>
 
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content">
+    <div class="w3-container">
+      <span onclick="document.getElementById('id01').style.display='none'"
+      class="w3-button w3-display-topright">&times;</span>
+      <p>
+        <div id= 'flash'>
+          <%if flash[:wronguser] %>
+            <%= flash[:wronguser] %>
+          <% end %>
+        </div>
+      </p>
+    </div>
+  </div>
+</div>
 
 <footer>
 <a href='/home'> Home </a> or <a href='/logout'>Log Out</a>

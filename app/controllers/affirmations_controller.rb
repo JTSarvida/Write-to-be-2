@@ -53,7 +53,7 @@ class AffirmationsController < ApplicationController
       if current_user.id == @affirmation.user_id
         erb :'affirmations/edit'
       else
-        flash[:wronguser] = "You cannot edit other user's affirmations"
+        flash[:wronguser] = "You cannot edit or delete other user's affirmations"
         redirect "/affirmations/#{@affirmation.id}"
       end
     else
@@ -73,7 +73,7 @@ class AffirmationsController < ApplicationController
           @affirmation.update(params[:affirmation])
           redirect "/affirmations/#{@affirmation.id}"
         else
-          flash[:wronguser] = "You cannot edit other user's affirmations"
+          flash[:wronguser] = "You cannot edit or delete other user's affirmations"
           redirect "/affirmations/#{@affirmation.id}/edit"
         end
       end
@@ -90,7 +90,7 @@ class AffirmationsController < ApplicationController
         @affirmation.delete
         redirect '/home'
       else
-        flash[:wronguser] = "You cannot delete other user's affirmations"
+        flash[:wronguser] = "You cannot edit or delete other user's affirmations"
         redirect "/affirmations/#{@affirmation.id}"
       end
     else

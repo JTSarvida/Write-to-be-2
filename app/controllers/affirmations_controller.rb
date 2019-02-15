@@ -28,7 +28,7 @@ class AffirmationsController < ApplicationController
   get '/affirmations/:id' do
     if logged_in?
       @affirmations = Affirmation.all
-      @affirmation = @affirmations[params[:id].to_i-1]
+      @affirmation = Affirmation.find_by_id(params[:id])
       @user = User.find(@affirmation.user_id)
       erb :'/affirmations/single-affirmation'
     else
@@ -49,7 +49,7 @@ class AffirmationsController < ApplicationController
   get '/affirmations/:id/edit' do
     if logged_in?
       @affirmations = Affirmation.all
-      @affirmation = @affirmations.find(params[:id])
+      @affirmation = Affirmation.find_by_id(params[:id])
       if current_user.id == @affirmation.user_id
         erb :'affirmations/edit'
       else
@@ -63,7 +63,7 @@ class AffirmationsController < ApplicationController
 
   patch '/affirmations/:id' do
     @affirmations = Affirmation.all
-    @affirmation = @affirmations.find(params[:id])
+    @affirmation = Affirmation.find_by_id(params[:id])
     if logged_in?
       if params[:affirmation]["content"] == ""
         flash[:emptyinput] = "Please enter your desired edit"
@@ -84,7 +84,7 @@ class AffirmationsController < ApplicationController
 
   delete '/affirmations/:id/delete' do
     @affirmations = Affirmation.all
-    @affirmation = @affirmations.find(params[:id])
+    @affirmation = Affirmation.find_by_id(params[:id])
     if logged_in?
       if current_user.id == @affirmation.user_id
         @affirmation.delete

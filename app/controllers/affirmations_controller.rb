@@ -26,6 +26,14 @@ class AffirmationsController < ApplicationController
   end
 
   get '/affirmations/:id' do
+    if current_user.id == Affirmation.find_by_id(params[:id]).user_id
+      flash.now[:edit] = "Editing #{current_user.username}'s affirmation!"
+      flash.now[:delete] = "Deleting #{current_user.username}'s affirmation!"
+    else
+      flash.now[:edit] = "You cannot edit or delete other user's affirmations"
+      flash.now[:delete] = "You cannot edit or delete other user's affirmations"
+    end
+
     if logged_in?
       @affirmations = Affirmation.all
       @affirmation = Affirmation.find_by_id(params[:id])
@@ -47,10 +55,12 @@ class AffirmationsController < ApplicationController
   end
 
   get '/affirmations/:id/edit' do
+
     if logged_in?
       @affirmations = Affirmation.all
       @affirmation = Affirmation.find_by_id(params[:id])
       if current_user.id == @affirmation.user_id
+        flash[:wronguser] = "Editing #{current_user.username}'s affirmation!"
         erb :'affirmations/edit'
       else
         flash[:wronguser] = "You cannot edit or delete other user's affirmations"
@@ -70,6 +80,7 @@ class AffirmationsController < ApplicationController
         redirect "/affirmations/#{@affirmation.id}/edit"
       else
         if @affirmation.user_id == current_user.id
+          flash[:wronguser] = "Editing #{current_user.username}'s affirmation!"
           @affirmation.update(params[:affirmation])
           redirect "/affirmations/#{@affirmation.id}"
         else
@@ -87,6 +98,7 @@ class AffirmationsController < ApplicationController
     @affirmation = Affirmation.find_by_id(params[:id])
     if logged_in?
       if current_user.id == @affirmation.user_id
+        flash[:wronguser] = "Deleting #{current_user.username}'s affirmation!"
         @affirmation.delete
         redirect '/home'
       else

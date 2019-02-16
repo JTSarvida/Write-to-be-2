@@ -1,9 +1,14 @@
 body {
   background-color: lightblue;
+  font-family: 'Raleway', sans-serif;
   color: DarkSlateGray;
 }
 
 h1 {
+  text-align: center;
+}
+
+h2 {
   text-align: center;
 }
 
@@ -24,6 +29,14 @@ a:hover {
 #user_profile_box {
   display: inline-block;
   background-color: beige;
+}
+
+#login {
+  background: #eceeee;
+  border: 1px solid #42464b;
+  border-radius: 6px;
+  margin: 20px auto 0;
+  width: 180px;
 }
 
 .buttons {

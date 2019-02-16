@@ -1,7 +1,7 @@
 <h1>Affirmations that <%=@profile.username%> has written.</h1>
 <% @profile.affirmations.each do |affirmation| %>
   <div>
-    <a href= "/affirmations/<%= affirmation.id %>"><%= affirmation.content %></a>
+    <a href= "/affirmations/<%= affirmation.id %>"><li><%= affirmation.content %></li></a>
   </div>
 <% end %> <br>
 

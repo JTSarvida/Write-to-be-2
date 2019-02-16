@@ -10,7 +10,7 @@
 <h1> Daily Affirmations </h1>
 <% @dailyaffirmations.each do |affirmation| %>
 <div>
-  <a href= "/affirmations/<%= affirmation.id %>"><%= affirmation.content %></a>
+  <a href= "/affirmations/<%= affirmation.id %>"><li><%= affirmation.content %></li></a>
 </div>
 <%end%>
 

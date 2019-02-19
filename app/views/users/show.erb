@@ -8,11 +8,13 @@
 </div>
 
 <h1> Daily Affirmations </h1>
+<ul>
 <% @dailyaffirmations.each do |affirmation| %>
 <div>
   <a href= "/affirmations/<%= affirmation.id %>"><li><%= affirmation.content %></li></a>
 </div>
 <%end%>
+</ul>
 
 <!-- Will implement once I get like system in.
 <h1> Liked Affirmations </h1>

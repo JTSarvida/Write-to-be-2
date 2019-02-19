@@ -1,9 +1,12 @@
 <h1>Everyone's Affirmations</h1>
+<ul>
 <% @affirmations.each do |affirmation| %>
   <div>
     <a href= "/affirmations/<%= affirmation.id %>"> <li><%= affirmation.content %></li> </a>
   </div>
-<%end%><br>
+<%end%>
+</ul>
+<br>
 <footer>
   <a href='/home'> Home </a> or <a href='/logout'>Log Out</a>
 </footer>

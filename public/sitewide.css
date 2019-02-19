@@ -1,7 +1,7 @@
 body {
-  background-color: lightblue;
+  background-image: url("images/bokeh-heart-light.jpg");
   font-family: 'Raleway', sans-serif;
-  color: DarkSlateGray;
+  color: white;
 }
 
 h1 {
@@ -18,7 +18,7 @@ footer {
 
 a:link {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 a:hover {
@@ -28,7 +28,13 @@ a:hover {
 
 #user_profile_box {
   display: inline-block;
-  background-color: beige;
+  background-color: #99bbff;
+  border: 1px solid #42464b;
+  border-radius: 6px;
+}
+
+#user_profile_box a {
+  color: white;
 }
 
 #formcontainer {
@@ -40,10 +46,44 @@ a:hover {
   text-align: center;
 }
 
-/* for some reason, cannot rename this css selector above to "forms", or something else that makes more contextual sense, so leaving this comment here in order to research this later"
+#textcontainer {
+  background-color: #99bbff;
+  color: white;
+  border-radius: 2em;
+  margin-left: 20%;
+  margin-right: 20%;
+  opacity: 0.95;
+}
 
-.buttons {
-  display: inline-block;
+#textcontainer p {
+  margin: 2em;
+}
+
+#ButtonContainer {
+
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid #ddd;
+  background-color: #99bbff;
+  border-radius: 2em;
+  margin-left: 35%;
+  margin-right: 35%;
+  opacity: 0.95;
+}
+
+ul li {
+  padding: 8px 16px;
+  border-bottom: 1px solid #ddd;
+  color: white;
+  text-align: center;
+}
+
+ul li:last-child {
+  border-bottom: none
 }
 
 
@@ -68,6 +108,7 @@ a:hover {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+  color: black;
 }
 
 /* The Close Button */
@@ -83,9 +124,4 @@ a:hover {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-#ButtonContainer {
-
-  text-align: center;
 }

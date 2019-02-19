@@ -1,9 +1,12 @@
 <h1>Affirmations that <%=current_user.username%> has written.</h1>
+<ul>
 <% current_user.affirmations.each do |affirmation| %>
   <div>
-    <%= affirmation.content %>
+    <a href= "/affirmations/<%= affirmation.id %>"><li><%= affirmation.content %></li></a>
   </div>
-<% end %> <br>
+<% end %>
+</ul>
+ <br>
 
 <footer>
 <a href='/home'> Home </a> or <a href='/logout'>Log Out</a>

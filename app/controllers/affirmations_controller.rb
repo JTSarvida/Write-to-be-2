@@ -10,6 +10,12 @@ class AffirmationsController < ApplicationController
   end
 
   get '/affirmations/new' do
+    if params["content"] == ""
+      flash[:emptyinput] = "Please enter your affirmation."
+    else
+      flash[:emptyinput] = "Creating your affirmation!"
+    end
+
     if logged_in?
       erb :'/affirmations/new'
     else

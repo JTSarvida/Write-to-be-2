@@ -1,9 +1,29 @@
 <h1>Write a new affirmation!</h1>
+
+<div id="formcontainer">
 <form action='/affirmations' method='POST'>
   <input type='text' id='content' name='affirmation[content]'><br>
-  <input type='submit' value='submit'>
+  <input type='submit' value='submit' onclick="document.getElementById('myModalN').style.display='block'">
 </form>
+</div>
+
 <br>
+
+<!--Modal -->
+<div id="myModalN" class="modal">
+  <div class="modal-content">
+      <span onclick="document.getElementById('myModalN').style.display='none'"
+      class="close">&times;</span>
+      <div id= 'flash'>
+      <p>
+          <%if flash[:emptyinput] %>
+            <%= flash[:emptyinput] %>
+          <% end %>
+      </p>
+      </div>
+  </div>
+</div>
+<!--End of Modal-->
 
 <footer>
 <a href='/home'> Home </a> or <a href='/logout'>Log Out</a>

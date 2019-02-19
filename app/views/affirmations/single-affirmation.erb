@@ -2,6 +2,7 @@
 <h1> <%= @affirmation.content %></h1>
 <h2> This affirmation was written by <a href='/users/profile/<%= @user.slug%>'><%= @user.username %></a> </h2>
 
+<div id='ButtonContainer'>
 <form style="display: inline-block;"method="GET" action="/affirmations/<%=@affirmation.id%>/edit">
 <input type="submit" value="Edit Affirmation" onclick="document.getElementById('myModalE').style.display='block'"
 class="close">
@@ -12,6 +13,8 @@ class="close">
   <input type="submit" value="Delete Affirmation" onclick="document.getElementById('myModalD').style.display='block'"
 class="close">
 </form>
+</div>
+
 <br>
 <br>
 

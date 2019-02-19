@@ -5,12 +5,17 @@
 </div>
 <h1>Edit your affirmation!</h1>
 
+<div id="formcontainer">
 <form action='/affirmations/<%=@affirmation.id%>' method='POST'>
   <input id='hidden' type='hidden' name='_method' value='PATCH'>
   <input type='text' name='affirmation[content]' id='content' value='<%=@affirmation.content%>'>
   <br>
   <input type='submit' value='Edit'>
 </form>
+</div>
+<br>
+
+
 <footer>
 <a href='/home'> Home </a> or <a href='/logout'>Log Out</a>
 </footer>

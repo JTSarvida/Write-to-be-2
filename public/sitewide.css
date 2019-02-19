@@ -31,13 +31,16 @@ a:hover {
   background-color: beige;
 }
 
-#login {
+#formcontainer {
   background: #eceeee;
   border: 1px solid #42464b;
   border-radius: 6px;
   margin: 20px auto 0;
   width: 180px;
+  text-align: center;
 }
+
+/* for some reason, cannot rename this css selector above to "forms", or something else that makes more contextual sense, so leaving this comment here in order to research this later"
 
 .buttons {
   display: inline-block;
@@ -80,4 +83,9 @@ a:hover {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#ButtonContainer {
+
+  text-align: center;
 }

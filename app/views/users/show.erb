@@ -1,5 +1,5 @@
 <div id='user_profile_box'>
-<a style= "font-weight: bold;" href='/users/profile'><%= current_user.username %></a><br>
+<a style= "font-weight: bold;" href='/users/profile/<%=current_user.slug%>'><%= current_user.username %></a><br>
 <%# current_user.friends.count %>
 <a href='/affirmations/show'><%= current_user.affirmations.count %> Written Affirmations</a><br>
 <a href='/affirmations'>All affirmations</a> <br>

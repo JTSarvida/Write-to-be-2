@@ -9,11 +9,10 @@ class SessionsController < ApplicationController
   end
 
   post '/register' do
-    @users = User.all
-    @usernames = []
-    @users.each {|user| @usernames << user.username}
+    @user = User.find_by(:username => params[:username])
+
     if !params[:password].empty? && !params[:username].empty? && !params[:email].empty?
-      if @usernames.include?(params[:username]) || @usernames.include?(params[:email])
+      if @user
         flash[:alreadyused] = 'This username or email address has already been used.'
         redirect '/register'
       else

@@ -2,7 +2,7 @@
 <ul>
 <% @affirmations.each do |affirmation| %>
   <div>
-    <a href= "/affirmations/<%= affirmation.id %>"> <li><%= affirmation.content %></li> </a>
+    <a href= "/affirmations/<%= affirmation.id %>"> <li><%=affirmation.user.username%> says: <%= affirmation.content %></li> </a>
   </div>
 <%end%>
 </ul>

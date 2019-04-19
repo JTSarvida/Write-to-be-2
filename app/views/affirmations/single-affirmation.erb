@@ -1,6 +1,6 @@
 
 <h1> <%= @affirmation.content %></h1>
-<h2> This affirmation was written by <a href='/users/profile/<%= @user.slug%>'><%= @user.username %></a> </h2>
+<h2> This affirmation was written by <a href='/users/profile/<%= User.find(@affirmation.user_id).slug%>'><%= User.find(@affirmation.user_id).username %></a> </h2>
 
 <div id='ButtonContainer'>
 <form style="display: inline-block;"method="GET" action="/affirmations/<%=@affirmation.id%>/edit">

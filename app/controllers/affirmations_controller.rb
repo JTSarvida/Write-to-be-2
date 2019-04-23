@@ -6,22 +6,26 @@ class AffirmationsController < ApplicationController
     #  erb :'/affirmations/index'
   #  else
   #  end
-  redirect_if_not_logged_in(:'/affirmations/index')
+  redirect_if_not_logged_in
+  @affirmations = Affirmation.all
+  @dailyaffirmations = @affirmations.take(10)
+  erb :'/affirmations/index'
   end
 
   get '/affirmations/new' do
-    if params["content"] == ""
-      flash[:emptyinput] = "Please enter your affirmation."
-    else
-      flash[:emptyinput] = "Creating your affirmation!"
-    end
 
     #if logged_in?
     #  erb :'/affirmations/new'
   #  else
   #    redirect '/login'
   #  end
-    redirect_if_not_logged_in(:'/affirmations/new')
+    redirect_if_not_logged_in
+    if params["content"] == ""
+      flash[:emptyinput] = "Please enter your affirmation."
+    else
+      flash[:emptyinput] = "Creating your affirmation!"
+    end
+    erb :'/affirmations/new'
   end
 
   get '/affirmations/show' do
@@ -30,18 +34,11 @@ class AffirmationsController < ApplicationController
   #  else
     #  redirect '/login'
     #end
-
-    redirect_if_not_logged_in(:'/affirmations/show')
+    redirect_if_not_logged_in
+    erb :'/affirmations/show'
   end
 
   get '/affirmations/:id' do
-    if current_user.id == Affirmation.find_by_id(params[:id]).user_id
-      flash.now[:edit] = "Editing #{current_user.username}'s affirmation!"
-      flash.now[:delete] = "Deleting #{current_user.username}'s affirmation!"
-    else
-      flash.now[:edit] = "You cannot edit or delete other user's affirmations"
-      flash.now[:delete] = "You cannot edit or delete other user's affirmations"
-    end
 
     #if logged_in?
     #  @affirmations = Affirmation.all
@@ -52,7 +49,15 @@ class AffirmationsController < ApplicationController
     #  redirect '/login'
     #end
 
-    redirect_if_not_logged_in(:'/affirmations/single-affirmation')
+    redirect_if_not_logged_in
+    if current_user.id == Affirmation.find_by_id(params[:id]).user_id
+      flash.now[:edit] = "Editing #{current_user.username}'s affirmation!"
+      flash.now[:delete] = "Deleting #{current_user.username}'s affirmation!"
+    else
+      flash.now[:edit] = "You cannot edit or delete other user's affirmations"
+      flash.now[:delete] = "You cannot edit or delete other user's affirmations"
+    end
+    erb :'/affirmations/single-affirmation'
   end
 
   post '/affirmations' do
@@ -82,8 +87,14 @@ class AffirmationsController < ApplicationController
     #else
     #  redirect '/login'
     #end
-    redirect_if_not_logged_in(:'/affirmations/single-affirmation')
-    erb :'/affirmations/edit'
+    #redirect_if_not_logged_in(:'/affirmations/single-affirmation')
+    #erb :'/affirmations/edit'
+
+    redirect_if_not_logged_in
+    redirect_if_wrong_user
+    @affirmations = Affirmation.all
+    flash[:wronguser] = "Editing #{current_user.username}'s affirmation!"
+    erb :'affirmations/edit'
   end
 
   patch '/affirmations/:id' do
@@ -107,9 +118,17 @@ class AffirmationsController < ApplicationController
     #  redirect'/login'
     #end
 
-    redirect_if_not_logged_in(:'/affirmations/edit')
-    redirect_if_wrong_user(:'/affirmations/edit')
-    redirect "/affirmations/#{@affirmation.id}"
+    redirect_if_not_logged_in
+    redirect_if_wrong_user
+    @affirmations = Affirmation.all
+    if params[:affirmation]["content"] == ""
+      flash[:emptyinput] = "Please enter your desired edit"
+      redirect "/affirmations/#{@affirmation.id}/edit"
+    else
+      flash[:wronguser] = "Editing #{current_user.username}'s affirmation!"
+      @affirmation.update(params[:affirmation])
+      redirect "/affirmations/#{@affirmation.id}"
+    end
   end
 
   delete '/affirmations/:id/delete' do
@@ -126,9 +145,13 @@ class AffirmationsController < ApplicationController
     #  end
     #else
     #  redirect '/login'
-    #end
-    redirect_if_not_logged_in(:'/affirmations/single-affirmation')
-    redirect_if_wrong_user(:'/users/show')
+    #endredirect "/affirmations/#{@affirmation.id}"
+    redirect_if_not_logged_in
+    redirect_if_wrong_user
+    @affirmations = Affirmation.all
+    flash[:wronguser] = "Deleting #{current_user.username}'s affirmation!"
+    @affirmation.delete
+    redirect '/home'
   end
 
 

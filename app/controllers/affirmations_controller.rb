@@ -20,11 +20,6 @@ class AffirmationsController < ApplicationController
   #    redirect '/login'
   #  end
     redirect_if_not_logged_in
-    if params["content"] == ""
-      flash[:emptyinput] = "Please enter your affirmation."
-    else
-      flash[:emptyinput] = "Creating your affirmation!"
-    end
     erb :'/affirmations/new'
   end
 
@@ -50,6 +45,9 @@ class AffirmationsController < ApplicationController
     #end
 
     redirect_if_not_logged_in
+    @affirmations = Affirmation.all
+    @affirmation = Affirmation.find_by_id(params[:id])
+    @user = User.find(@affirmation.user_id)
     if current_user.id == Affirmation.find_by_id(params[:id]).user_id
       flash.now[:edit] = "Editing #{current_user.username}'s affirmation!"
       flash.now[:delete] = "Deleting #{current_user.username}'s affirmation!"
@@ -62,15 +60,18 @@ class AffirmationsController < ApplicationController
 
   post '/affirmations' do
     if params[:affirmation]['content'].empty?
+      flash[:emptyinput] = "Please enter your affirmation."
       redirect '/affirmations/new'
     else
       @affirmation = current_user.affirmations.build(params[:affirmation])
       @affirmation.save
       # @affirmation = Affirmation.create(params[:affirmation])
       # current_user.affirmations << @affirmation
+      flash[:emptyinput] = "Creating your affirmation!"
       redirect 'home'
     end
   end
+
 
   get '/affirmations/:id/edit' do
 
@@ -89,7 +90,6 @@ class AffirmationsController < ApplicationController
     #end
     #redirect_if_not_logged_in(:'/affirmations/single-affirmation')
     #erb :'/affirmations/edit'
-
     redirect_if_not_logged_in
     redirect_if_wrong_user
     @affirmations = Affirmation.all
@@ -121,6 +121,7 @@ class AffirmationsController < ApplicationController
     redirect_if_not_logged_in
     redirect_if_wrong_user
     @affirmations = Affirmation.all
+    binding.pry
     if params[:affirmation]["content"] == ""
       flash[:emptyinput] = "Please enter your desired edit"
       redirect "/affirmations/#{@affirmation.id}/edit"
